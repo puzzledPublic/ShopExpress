@@ -22,16 +22,33 @@ router.post('/login', passport.authenticate('local', {
 router.get('/signup', auth, function(req, res, next){
   res.render('userViews/signup');
 });
+
 router.post('/signup',function(req, res, next){
+
+  let userInstance = setUserParameter(req.body);
+  if(User.validateUser(userInstance, req.body.passwordcheck)){
+    User.create(userInstance, function(result){
+      res.send(result);
+    });
+  }
+  else{
+      res.render('userViews/signup');
+  }
   
-  
-  let userInstance = new User();
-  userInstance.setId(req.body.username);
-  userInstance.setName(req.body.name);
-  userInstance.setPasswordToHash(req.body.password);
-  User.create(userInstance, function(result){
-    res.send(result+"");
-  });
 });
+
+function setUserParameter(params){
+  let user = new User();
+  user.setId(params.username);
+  user.setName(params.name);
+  user.setPasswordToHash(params.password);
+  user.setZipcode(params.zipcode);
+  user.setAddr(params.addr);
+  user.setDetailsAddr(params.detailsaddr);
+  user.setTel(params.tel);
+  user.setHp(params.hp);
+  user.setEmail(params.email);
+  return user;
+}
 
 module.exports = router;
