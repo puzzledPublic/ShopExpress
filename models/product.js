@@ -15,23 +15,23 @@ class Product{
         this.customerPrice = 0;     //시중 가격
         this.price = 0;             //판매 가격
         this.soldout = 0;           //품절 여부
-        this.mainImage = '';        //메인 이미지
+        this.mainImage = '/w3images/No-image-found.jpg';        //메인 이미지
         
     }
 
     static findAll(categoryId, callback){
 
-        let query = 'SELECT * FROM shop_item_table WHERE it_id = ?';
+        let query = 'SELECT * FROM shop_item_table WHERE ca_id = ?';
         let queryParams = [categoryId];
 
         mysql.query(query, queryParams, function(err, results){
+            let products = [];
             if(err){
                 console.log(err);
-                callback();
+                callback(products);
                 return;
             }
             else if(results[0]){
-                let products = [];
                 for(let index in results){
                     products[index] = new Product();
                     products[index].id = results[index].it_id;
@@ -48,6 +48,9 @@ class Product{
                     products[index].mainImage = results[index].it_img;
                 }
 
+                callback(products);
+            }
+            else{
                 callback(products);
             }
         });

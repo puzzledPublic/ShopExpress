@@ -27,6 +27,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//로그인 여부(for showing html item)
+app.use(function(req, res, next){
+    res.locals.islogin = req.isAuthenticated();
+    next();
+});
 app.use('/', routes);
 //app.use('/users', users);
 

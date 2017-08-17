@@ -1,0 +1,30 @@
+<% include ./layout/header %>
+<body class="w3-content" style="max-width:1200px">
+
+  <% include ./layout/side %>
+  <!-- !PAGE CONTENT! -->
+  <div class="w3-main" style="margin-left:250px">
+
+    <!-- Push down content on small screens -->
+    <div class="w3-hide-large" style="margin-top:83px"></div>
+
+    <!-- Top header -->
+
+    <header class="w3-container w3-xlarge">
+      <p class="w3-left">ERROR</p>
+      <p class="w3-right">
+        <i class="fa fa-search w3-margin-right"></i>
+        <i class="fa fa-shopping-cart w3-margin-right"></i>
+        <a href="/users/login"><i class="fa fa-user w3-margin-right"></i></a>
+      </p>
+    </header>
+
+    <div class="w3-container w3-center w3-padding-32 w3-border">
+      <p>페이지가 존재하지 않습니다.</p>
+    </div>
+
+    <% include ./layout/footer %>
+
+</body>
+
+</html>

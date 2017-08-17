@@ -18,6 +18,10 @@ router.post('/login', passport.authenticate('local', {
   failureRedirect: '/users/login'
 }));
 
+router.get('/logout', function(req, res, next){
+  req.logOut();
+  res.render('index');
+});
 
 router.get('/signup', auth, function(req, res, next){
   res.render('userViews/signup');

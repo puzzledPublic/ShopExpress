@@ -3,6 +3,10 @@
       <p class="w3-right">
         <i class="fa fa-search w3-margin-right"></i>
         <i class="fa fa-shopping-cart w3-margin-right"></i>
-        <a href="/users/login"><i class="fa fa-user w3-margin-right"></i></a>
+        <% if(!islogin){ %>
+          <a href="/users/login"><i class="fa fa-user w3-margin-right"></i></a>
+        <% }else{ %>
+          <a href="/users/logout"><i class="fa fa-user w3-margin-right"></i></a>  
+        <% } %>
       </p>
     </header>
