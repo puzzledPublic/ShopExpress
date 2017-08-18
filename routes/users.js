@@ -3,10 +3,11 @@ var router = express.Router();
 var User = require('../models/user');
 var passport = require('passport');
 var auth = require('../helper/auth');
+var Level = require('../models/level');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('userpage');
+  res.render('404page');
 });
 
 router.get('/login', auth, function(req, res, next){
@@ -20,7 +21,7 @@ router.post('/login', passport.authenticate('local', {
 
 router.get('/logout', function(req, res, next){
   req.logOut();
-  res.render('index');
+  res.redirect('/');
 });
 
 router.get('/signup', auth, function(req, res, next){
@@ -39,6 +40,18 @@ router.post('/signup',function(req, res, next){
       res.render('userViews/signup');
   }
   
+});
+
+router.get('/info', function(req, res, next){
+  let info = {'name':req.user.name, 
+              'level':Level.getToString(req.user.level), 
+              'point':req.user.point};
+  res.render('userViews/info',{'info': info});
+});
+
+router.get('/account', function(req, res, next){
+  let account = req.user;
+  res.render('userViews/account',{'account': account});
 });
 
 function setUserParameter(params){

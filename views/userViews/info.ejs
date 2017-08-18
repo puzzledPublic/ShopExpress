@@ -1,0 +1,56 @@
+<% include ../layout/header %>
+<body class="w3-content" style="max-width:1200px">
+    <!-- SIDE BAR -->
+  <% include ../layout/side %>
+  <!-- !PAGE CONTENT! -->
+  <div class="w3-main" style="margin-left:250px">
+
+    <!-- Push down content on small screens -->
+    <div class="w3-hide-large" style="margin-top:83px"></div>
+
+    <!-- Top header -->
+    <% include ../layout/topheader %>
+
+    <div class="w3-row w3-grayscale w3-border w3-round-xlarge">
+        <div class="w3-container w3-text-grey">
+            <p>User Info</p>
+        </div>
+        
+        <div class="w3-container">
+            <div class="w3-container w3-cell w3-half m6 w3-border w3-padding">
+                <div class="w3-container">
+                    <p><b>L O G O  MEMBER<b></p>
+                </div>
+                <div class="w3-container">
+                    <p>Name:  <%= info.name %></p>
+                    <p>Level: <%= info.level %></p>
+                    <p>Point: <%= info.point %></p>
+                </div>
+            </div>
+            <div class="w3-container w3-cell w3-half m6 w3-border w3-padding" >
+                <div class="w3-container">
+                    <p>My Order <br>
+                       <p class="w3-small">주문조회  -  고객님께서 주문하신 상품의 주문내역을 확인하실 수 있습니다.
+비회원의 경우, 주문서의 주문번호와 비밀번호로 주문조회가 가능합니다.</p>
+                    </p>
+                    
+                    <a href="/users/account"> <p>My Account </a> <br>
+                        <p class="w3-small">회원정보  -  회원님의 개인정보를 관리하는 공간입니다.
+개인정보를 최신 정보로 유지하시면 보다 간편히 쇼핑을 즐기실 수 있습니다.</p>
+                    </p>  
+
+                    <p>Member Leave <br>
+                       <p class="w3-small">회원탈퇴  -  고객님의 개인정보 및 사이트 이용을 중단합니다.</p>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <% include ../layout/footer %>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/8.0.0/validator.min.js"></script>
+     <script src="/javascripts/validate.js"></script>
+</body>
+
+</html>

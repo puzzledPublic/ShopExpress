@@ -18,6 +18,8 @@ class User{
         this.hp = '';
         this.email = '';
         this.level = 0;
+        this.point = 0;
+
     }
 
     setPasswordToHash(originPassword){
@@ -93,6 +95,13 @@ class User{
                 user.setName(results[0]['mb_name']);
                 user.setPassword(results[0]['mb_password']);
                 user.setLevel(results[0]['mb_level']);
+                
+                user.setEmail(results[0]['mb_email']);
+                user.setTel(results[0]['mb_tel']);
+                user.setHp(results[0]['mb_hp']);
+                user.setZipcode(results[0]['mb_zip3']);
+                user.setAddr(results[0]['mb_addr1']);
+                user.setDetailsAddr(results[0]['mb_addr2']);
             }
             callback(err, user);
         });
@@ -157,6 +166,12 @@ class User{
     }
     setLevel(level){
         this.level = level;
+    }
+    getPoint(){
+        return this.point;
+    }
+    setPoint(point){
+        this.point = point;
     }
 }
 module.exports = User;

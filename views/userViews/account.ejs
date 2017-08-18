@@ -1,0 +1,79 @@
+<% include ../layout/header %>
+<body class="w3-content" style="max-width:1200px">
+    <!-- SIDE BAR -->
+  <% include ../layout/side %>
+  <!-- !PAGE CONTENT! -->
+  <div class="w3-main" style="margin-left:250px">
+
+    <!-- Push down content on small screens -->
+    <div class="w3-hide-large" style="margin-top:83px"></div>
+
+    <!-- Top header -->
+    <% include ../layout/topheader %>
+    <div class="w3-row w3-grayscale w3-border w3-round-xlarge">
+        <div class="w3-container w3-text-grey">
+            <p>My Account</p>
+        </div>
+        
+        <div class="w3-container">
+            <form method="POST" id="registerform" >
+            <div class="w3-container w3-cell">
+                <p class="w3-medium">I D </p>
+                <p class="w3-medium">비밀번호 </p>
+                <p class="w3-medium">비밀번호 확인 </p>
+                <p class="w3-medium">이름 </p>
+                <p class="w3-medium">주소 </p>
+                <br>
+                <br>
+                <br>
+                <p class="w3-medium">전화번호 </p>
+                <p class="w3-medium">휴대폰 </p>
+                <p class="w3-medium">E-mail </p>
+            </div>
+            <div class="w3-container w3-cell">
+                <div class="w3-cell">
+                    <input class="w3-input" type="text" name="username" id="username" value="<%=account.id %>" readonly="true">
+                </div>
+                <input class="w3-input" type="password" name="password" id="password">
+                <input class="w3-input" type="password" name="passwordcheck" id="passwordcheck">
+                <input class="w3-input" type="text" name="name" id="name" value="<%= account.name%>" readonly="true">
+                <div class="w3-cell">
+                    <input class="w3-input postcodify_postcode5" type="text" name="zipcode" id="zipcode" value="<%= account.zipcode%>" readonly="true">
+                </div>
+                <div class="w3-cell">
+                    <button class="w3-button w3-round w3-grey w3-tiny w3-padding" type="button" id="postcodify_search_button">검색</button>
+                </div>
+                <input class="w3-input postcodify_address" type="text" name="addr" id="addr" value="<%= account.addr %>" readonly="true">
+                <input class="w3-input postcodify_extra_info" type="text" name="detailsaddr" id="detailsaddr" value="<%= account.detailsaddr%>">
+                <input class="w3-input" type="text" name="tel" id="tel" value="<%= account.tel %>">
+                <input class="w3-input" type="text" name="hp" id="hp" value="<%= account.hp %>">
+                <input class="w3-input" type="text" name="email" id="email" value="<%= account.email %>">
+            </div>
+            <div class="w3-container w3-cell w3-hide-small">
+                <div>
+                    <button type="button" onclick="updateMemberAction()" class="w3-button w3-blue w3-round w3-center">가입하기</button>
+                </div>
+                <div>
+                    <a href="javascript:history.back()"><button type="button" class="w3-button w3-blue w3-round">취소</button></a>
+                </div>
+            </div>
+            </form>
+            <div class="w3-container w3-hide-large">
+                <button type="button" onclick="updateMemberAction()" class="w3-button w3-blue w3-round w3-center">가입하기</button>
+                <a href="javascript:history.back()"><button type="button" class="w3-button w3-blue w3-round">취소</button></a>
+            </div>
+        </div>
+    </div>
+    
+
+     <% include ../layout/footer %>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/8.0.0/validator.min.js"></script>
+     <script src="/javascripts/validate.js"></script>
+     <script>
+      $(function() { $("#postcodify_search_button").postcodifyPopUp(); });
+     </script>
+</body>
+
+</html>
