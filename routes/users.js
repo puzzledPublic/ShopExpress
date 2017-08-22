@@ -46,12 +46,32 @@ router.get('/info', function(req, res, next){
   let info = {'name':req.user.name, 
               'level':Level.getToString(req.user.level), 
               'point':req.user.point};
-  res.render('userViews/info',{'info': info});
+  res.render('userViews/info', {'info': info});
 });
 
 router.get('/account', function(req, res, next){
   let account = req.user;
-  res.render('userViews/account',{'account': account});
+  res.render('userViews/account', {'account': account});
+});
+
+router.put('/account', function(req, res, next){
+    let userInstance = setUserParameter(req.body);
+    userInstance.setId(req.user.id);
+    userInstance.setName(req.user.name);
+    if(User.validateUser(userInstance, req.body.passwordcheck)){
+      User.update(userInstance, function(result){
+        res.json(result).end();
+      });
+    }
+});
+
+//TODO:: 회원탈퇴 페이지 및 라우터, DB 쿼리(User.destroy()) 작성
+router.get('/leave', function(req, res, next){
+  res.render('userViews/leave');
+});
+
+router.delete('/leave', function(req, res, next){
+
 });
 
 function setUserParameter(params){

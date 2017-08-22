@@ -4,6 +4,7 @@ var hash;// = crypto.createHash('sha256');
 //hash 오브젝트가 digest Method를 한번 호출하면 다음 부터 사용 불가.
 //다시 createHash Method를 사용하여 hash 오브젝트 생성해서 사용.
 var validator = require('validator');
+var Level = require('./level');
 
 class User{
 
@@ -38,28 +39,28 @@ class User{
 
     static validateUser(user, passwordCheck){
         if(validator.isLength(user.getId(),{min:4}) == false || validator.isAlphanumeric(user.getId()) == false){
-            console.log('id');
+            console.log('validate error id');
             return false;
         }
         if(validator.isLength(user.getPassword(),{min: 6}) == false){
-             console.log('password');
+             console.log('validate error password');
             return false;
         }
         if(user.comparePassword(passwordCheck) == false){
-             console.log('password2');
+             console.log('validate error password compare');
             return false;
         }
         if(validator.isLength(user.getName(),{min: 2}) == false || validator.isInt(user.getName()) == true){
-             console.log('name');
+             console.log('validate error name');
             return false;
         }
         if(validator.isLength(user.getZipcode(),{min: 5}) == false || validator.isLength(user.getDetailsAddr(),{min:3}) == false){
-             console.log('addr');
+             console.log('validate error addr');
             return false;
         }
         let telRegExp = /^(01[016789]{1}|070|02|0[3-9]{1}[0-9]{1})-[0-9]{3,4}-[0-9]{4}$/;
         if(telRegExp.test(user.getHp()) == false){
-             console.log('tel');
+             console.log('validate error tel');
             return false;
         }
 
@@ -80,7 +81,25 @@ class User{
         });
     }
 
-    static delete(user, callback){
+    static update(user, callback){
+        let query = 'UPDATE member_table SET mb_password = ?, mb_email = ?, mb_tel = ?, mb_hp = ?, mb_zip3 = ?, mb_addr1 = ?, mb_addr2 = ?'
+                     + ' WHERE mb_id = ?';
+        let queryParams = [user.getPassword(), user.getEmail(), user.getTel(), user.getHp(), user.getZipcode(), user.getAddr(), user.getDetailsAddr(), user.getId()];
+
+        mysql.query(query, queryParams, function(err, results){
+            if(err){
+                console.log(err);
+                callback({'result': 0});
+                return;
+            }
+            callback({'result': results.affectedRows});
+        })
+    }
+
+    static destroy(userId, callback){
+        let query = ['SELECT mb_password FROM member_table where mb_id = ?', 
+                     'UPDATE member_table SET mb_level = ? WHERE mb_id = ?'];
+        let queryParams = [userId, [Level.getToInt('탈퇴'), userId]];
 
     }
 
@@ -89,7 +108,7 @@ class User{
         let queryParams = [userId];
         mysql.query(query, queryParams, function(err, results){
             let user;
-            if(results[0]){
+            if(results[0] && results[0].level != Level.getToInt('탈퇴')){
                 user = new User();
                 user.setId(results[0]['mb_id']);
                 user.setName(results[0]['mb_name']);
