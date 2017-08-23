@@ -96,11 +96,31 @@ class User{
         })
     }
 
-    static destroy(userId, callback){
-        let query = ['SELECT mb_password FROM member_table where mb_id = ?', 
-                     'UPDATE member_table SET mb_level = ? WHERE mb_id = ?'];
-        let queryParams = [userId, [Level.getToInt('탈퇴'), userId]];
+    static destroy(user, callback){
+        let query = ['SELECT mb_password FROM member_table WHERE mb_id = ?', 
+                     'UPDATE member_table SET mb_level = ?, mb_leavetime = now() WHERE mb_id = ?'];
+        let queryParams = [user.getId(), [Level.getToInt('탈퇴'), user.getId()]];
 
+        mysql.query(query[0], queryParams[0], function(err, results){
+            if(err){
+                console.log(err);
+                callback({'result': false, 'message': '탈퇴 오류'});
+                return;
+            }
+            if(results[0]['mb_password'] && results[0]['mb_password'] === user.getPassword()){
+                mysql.query(query[1], queryParams[1], function(err, results){
+                    if(err){
+                        console.log(err);
+                        callback({'result': false, 'message': '탈퇴 오류'});
+                        return;
+                    }
+                    callback({'result': true, 'message': '탈퇴 완료'});
+                });
+            }
+            else{
+                callback({'result': false, 'message': '비밀번호를 확인해주세요.'});
+            }
+        });
     }
 
     static findOne(userId, callback){
@@ -108,7 +128,7 @@ class User{
         let queryParams = [userId];
         mysql.query(query, queryParams, function(err, results){
             let user;
-            if(results[0] && results[0].level != Level.getToInt('탈퇴')){
+            if(results[0] && results[0]['mb_level'] != Level.getToInt('탈퇴')){
                 user = new User();
                 user.setId(results[0]['mb_id']);
                 user.setName(results[0]['mb_name']);

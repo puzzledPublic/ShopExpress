@@ -1,0 +1,51 @@
+<% include ../layout/header %>
+<body class="w3-content" style="max-width:1200px">
+    <!-- SIDE BAR -->
+  <% include ../layout/side %>
+  <!-- !PAGE CONTENT! -->
+  <div class="w3-main" style="margin-left:250px">
+
+    <!-- Push down content on small screens -->
+    <div class="w3-hide-large" style="margin-top:83px"></div>
+
+    <!-- Top header -->
+    <% include ../layout/topheader %>
+
+    <div class="w3-row w3-grayscale w3-border w3-round-xlarge">
+        <div class="w3-container w3-text-grey">
+            <p>User Withdrawal</p>
+        </div>
+        
+        <div class="w3-container">
+            <div class="w3-container w3-border w3-padding">
+                <div class="w3-container">
+                    <p><b>회원 탈퇴<b></p>
+                </div>
+                <div class="w3-container w3-border">
+                    <p class="w3-small">1. 회원 탈퇴를 신청하시면 해당 아이디는 즉시 탈퇴 처리되며, 이후 영구적으로 사용이 중지되므로 새로운 아이디로만 재가입이 가능합니다.</p>
+                    <p class="w3-small">2. 회원 탈퇴를 신청하시면 보유하신 포인트는 삭제되며 복구되지 않습니다.</p>
+                    <p class="w3-small">3. 거래 정보가 있는 경우, 판매 거래 정보관리를 위하여 구매와 관련된 상품정보, 아이디, 거래 내역등에 대한 기본정보는 탈퇴 후 3년간 보관합니다.</p>
+                </div>
+                <div class="w3-container w3-border">
+                    <form id="deleteform">
+                        <div class="w3-container">
+                            <p class="w3-center">비밀번호 확인</p>
+                            <input class="w3-input" type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요.."/>
+                        </div>
+                        <div class="w3-container w3-center">
+                            <button class="w3-button w3-blue" type="button" onclick="memberDeleteAction()">탈퇴</button>
+                            <button class="w3-button w3-blue" type="button" onclick="history.back()">취소</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <% include ../layout/footer %>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/8.0.0/validator.min.js"></script>
+     <script src="/javascripts/validate.js"></script>
+</body>
+
+</html>

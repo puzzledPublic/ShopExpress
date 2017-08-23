@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
   res.render('404page');
 });
 
-router.get('/login', auth, function(req, res, next){
+router.get('/login', auth.notAllowForLogined, function(req, res, next){
   res.render('userViews/login');
 });
 
@@ -19,12 +19,12 @@ router.post('/login', passport.authenticate('local', {
   failureRedirect: '/users/login'
 }));
 
-router.get('/logout', function(req, res, next){
+router.get('/logout', auth.notAllowForNotLogined, function(req, res, next){
   req.logOut();
   res.redirect('/');
 });
 
-router.get('/signup', auth, function(req, res, next){
+router.get('/signup', auth.notAllowForLogined, function(req, res, next){
   res.render('userViews/signup');
 });
 
@@ -33,7 +33,7 @@ router.post('/signup',function(req, res, next){
   let userInstance = setUserParameter(req.body);
   if(User.validateUser(userInstance, req.body.passwordcheck)){
     User.create(userInstance, function(result){
-      res.send(result);
+      res.send(result+'');  //수정필요
     });
   }
   else{
@@ -42,14 +42,14 @@ router.post('/signup',function(req, res, next){
   
 });
 
-router.get('/info', function(req, res, next){
+router.get('/info', auth.notAllowForNotLogined, function(req, res, next){
   let info = {'name':req.user.name, 
               'level':Level.getToString(req.user.level), 
               'point':req.user.point};
   res.render('userViews/info', {'info': info});
 });
 
-router.get('/account', function(req, res, next){
+router.get('/account', auth.notAllowForNotLogined, function(req, res, next){
   let account = req.user;
   res.render('userViews/account', {'account': account});
 });
@@ -65,13 +65,17 @@ router.put('/account', function(req, res, next){
     }
 });
 
-//TODO:: 회원탈퇴 페이지 및 라우터, DB 쿼리(User.destroy()) 작성
-router.get('/leave', function(req, res, next){
+
+router.get('/leave', auth.notAllowForNotLogined, function(req, res, next){
   res.render('userViews/leave');
 });
 
 router.delete('/leave', function(req, res, next){
-
+  let userInstance = setUserParameter(req.body);
+  userInstance.setId(req.user.id);
+  User.destroy(userInstance, function(result){
+    res.json(result).end();
+  });
 });
 
 function setUserParameter(params){

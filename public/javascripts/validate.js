@@ -2,14 +2,14 @@ function memberJoinAction() {
     if (validator.isLength($('#username').val(), {
             min: 4
         }) == false || validator.isAlphanumeric($('#username').val()) == false) {
-        alert('ID 입력이 잘못됐습니다.\n(4글자 이상, 영문자, 숫자)');
+        alert('ID 입력을 확인해주세요.\n(4글자 이상, 영문자, 숫자)');
         return false;
     }
 
     if ($('#password').val() == '' || validator.isLength($('#password').val(), {
             min: 6
         }) == false) {
-        alert('비밀번호 입력이 잘못됐습니다.\n(6글자 이상)');
+        alert('비밀번호 입력을 확인해주세요.\n(6글자 이상)');
         return false;
     }
 
@@ -21,31 +21,31 @@ function memberJoinAction() {
     if (validator.isLength($('#name').val(), {
             min: 2
         }) == false || validator.isInt($('#name').val()) == true) {
-        alert('이름의 입력이 잘못됐습니다.');
+        alert('이름의 입력을 확인해주세요.');
         return false;
     }
 
     if ($('#zipcode').val() == '' || $('#detailsaddr').val() == '') {
-        alert('주소입력이 잘못됐습니다.');
+        alert('주소 입력을 확인해주세요.');
         return false;
     }
 
     let telRegExp = /^(01[016789]{1}|070|02|0[3-9]{1}[0-9]{1})-[0-9]{3,4}-[0-9]{4}$/;
     if ($('#tel').val() != '') {
         if (!telRegExp.test($('#tel').val())) {
-            alert('전화번호 입력이 잘못됐습니다.');
+            alert('전화번호 입력을 확인해주세요.');
             return false;
         }
     }
 
     if ($('#hp').val() == '' || telRegExp.test($('#hp').val()) == false) {
-        alert('휴대폰번호 입력이 잘못됐습니다.');
+        alert('휴대폰번호 입력을 확인해주세요.');
         return false;
     }
 
     if ($('#email').val() != '') {
         if (validator.isEmail($('#email').val()) == false) {
-            alert('이메일 입력이 잘못됐습니다.');
+            alert('이메일 입력을 확인해주세요.');
             return false;
         }
     }
@@ -69,14 +69,14 @@ function memberLoginAction(){
     if (validator.isLength($('#username').val(), {
             min: 4
         }) == false || validator.isAlphanumeric($('#username').val()) == false) {
-        alert('ID 입력이 잘못됐습니다.\n(4글자 이상, 영문자, 숫자)');
+        alert('ID 입력을 확인해주세요.\n(4글자 이상, 영문자, 숫자)');
         return false;
     }
 
     if ($('#password').val() == '' || validator.isLength($('#password').val(), {
             min: 6
         }) == false) {
-        alert('비밀번호 입력이 잘못됐습니다.\n(6글자 이상)');
+        alert('비밀번호 입력을 확인해주세요.\n(6글자 이상)');
         return false;
     }
 
@@ -88,7 +88,7 @@ function memberUpdateAction(){
     if ($('#password').val() == '' || validator.isLength($('#password').val(), {
             min: 6
         }) == false) {
-        alert('비밀번호 입력이 잘못됐습니다.\n(6글자 이상)');
+        alert('비밀번호 입력을 확인해주세요.\n(6글자 이상)');
         return false;
     }
 
@@ -98,26 +98,26 @@ function memberUpdateAction(){
     }
 
     if ($('#zipcode').val() == '' || $('#detailsaddr').val() == '') {
-        alert('주소입력이 잘못됐습니다.');
+        alert('주소입력을 확인해주세요.');
         return false;
     }
 
     let telRegExp = /^(01[016789]{1}|070|02|0[3-9]{1}[0-9]{1})-[0-9]{3,4}-[0-9]{4}$/;
     if ($('#tel').val() != '') {
         if (!telRegExp.test($('#tel').val())) {
-            alert('전화번호 입력이 잘못됐습니다.');
+            alert('전화번호 입력을 확인해주세요.');
             return false;
         }
     }
 
     if ($('#hp').val() == '' || telRegExp.test($('#hp').val()) == false) {
-        alert('휴대폰번호 입력이 잘못됐습니다.');
+        alert('휴대폰번호 입력을 확인해주세요.');
         return false;
     }
 
     if ($('#email').val() != '') {
         if (validator.isEmail($('#email').val()) == false) {
-            alert('이메일 입력이 잘못됐습니다.');
+            alert('이메일 입력을 확인해주세요.');
             return false;
         }
     }
@@ -137,6 +137,30 @@ function memberUpdateAction(){
     });
 
 }
+
+function memberDeleteAction(){
+    if ($('#password').val() == '' || validator.isLength($('#password').val(), {
+            min: 6
+        }) == false) {
+        alert('비밀번호 입력을 확인해주세요.\n(6글자 이상)');
+        return false;
+    }
+    let formdata = $('#deleteform').serialize();
+    $.ajax({
+        url:'/users/leave',
+        data: formdata,
+        type: 'DELETE',
+        success: function(data){
+            if(data.result){
+                alert(data.message);
+                location.href = '/users/logout';
+            }else{
+                alert(data.message);
+            }
+        }
+    });
+}
+
 //공통 사이드 바
 // Accordion 
 function myAccFunc() {
