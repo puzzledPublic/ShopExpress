@@ -1,0 +1,30 @@
+hr {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+th {
+    font-weight: normal; 
+    width: 20%; 
+    background-color: #f5f4f4;
+}
+table, th, td {
+    border: 1px solid #d9dadc;
+}
+label.gLabel {
+    display: inline-block;
+    padding: 0 40px 0 0;
+    outline: 0 none;
+}
+.txtInfo {
+    margin: 2px 0 0 0;
+    font-size: 11px;
+    font-style: normal;
+    color: #898989;
+    list-style-type: square;
+    padding: 0 0 0 5px;
+}
+li {
+    list-style: none;
+}
