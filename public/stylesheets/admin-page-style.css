@@ -25,6 +25,13 @@ label.gLabel {
     list-style-type: square;
     padding: 0 0 0 5px;
 }
+.registCategory {
+    margin: 2px 0 0 0;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: normal;
+    padding: 0 0 0 5px;
+}
 li {
     list-style: none;
 }

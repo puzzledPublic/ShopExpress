@@ -39,7 +39,30 @@
                 </tr>
                 <tr>
                     <th scope="row">상품분류 선택</th>
-                    <td></td>
+                    <td>
+                        <div class="w3-container">
+                            <table class="w3-table">
+                                <tr>
+                                    <th>1차분류</th>
+                                    <th>2차분류</th>
+                                    <th>3차분류</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <ul class="registCategory">
+                                            <li>Outer Wear</li>
+                                            <li>Tops</li>
+                                            <li>Dresses</li>
+                                            <li>Bottoms</li>
+                                            <li>Shoes</li>
+                                        </ul>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <th scope="row">메인 진열</th>
@@ -58,27 +81,255 @@
         <div class="w3-container">
             <table class="w3-table">
                <tr>
-                   <th scope="row">상품명</th>
+                   <th scope="row">상품명 <img src="/w3images/required_icon.png"/></th>
                    <td>
+                        <input class="w3-input w3-border"type="text" name="product_name" placeholder="예시) 스트라이프 셔츠 [블루]">
                    </td>
                </tr>
                 <tr>
                     <th scope="row">모델명</th>
                     <td>
+                        <input class="w3-input w3-border" type="text" name="product_model">
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row">상품코드</th>
+                    <th scope="row">상품 코드</th>
                     <td>자동생성</td>
                 </tr>
                 <tr>
                     <th scope="row">상품 유형</th>
-                    <td></td>
+                    <td>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">상품 요약설명</th>
+                    <td>
+                        <input class="w3-input w3-border" type="text" name="product_basic" value="">
+                        <p class="txtInfo">상품의 간단한 추가 정보를 입력할 수 있습니다.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">상품 상세설명</th>
+                    <td>
+                        <textarea rows="10" style="width:100%"></textarea>
+                    </td>
                 </tr>
             </table>
         </div>
     </div>
+    <div class="w3-container">
+        <div class="w3-container w3-grey w3-margin">
+            <p>
+                판매 정보
+            </p>
+        </div>
+        <div class="w3-container">
+            <table class="w3-table">
+               <tr>
+                   <th scope="row">소비자가</th>
+                   <td>
+                        
+                   </td>
+               </tr>
+                <tr>
+                    <th scope="row">공급가 <img src="/w3images/required_icon.png"></th>
+                    <td>
+                        <div class="w3-row">
+                            <div class="w3-col" style="width:15%">
+                                <input class="w3-input w3-border" style="padding: 2px" type="text" name="product_model" dir="rtl">
+                            </div>
+                            <div class="w3-col" style="width:auto">
+                                <span>원</span>
+                            </div>
+                        </div>
+                         <p class="txtInfo">원화 기준으로 입력해주세요.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">과세 구분</th>
+                    <td>
+                        <div class="w3-row">
+                            <label class="gLabel"><input type="radio" name="product_tax_type" id="product_tax_typeA" value="A">과세상품</label>
+                            <label class="gLabel"><input type="radio" name="product_tax_type" id="product_tax_typeB" value="B">영세상품</label>
+                            <label class="gLabel"><input type="radio" name="product_tax_type" id="product_tax_typeC" value="C">면세상품</label>
+                        </div>
+                        <div id="productPriceSaleTaxBox" class="w3-row" style="padding-left:10px;padding-top:10px">
+                            <div class="w3-col" style="width:auto">
+                                <span id="productPriceSaleTax">과세율 : </span>
+                            </div>
+                            <div class="w3-col" style="width:15%">
+                                <input class="w3-input w3-border" style="padding: 2px" type="text" name="tax_rate" dir="rtl" value="10">
+                            </div>
+                            <div class="w3-col" style="width: auto">
+                                <span> % </span>
+                            </div>
+                        </div>
+                        <p class="txtInfo">판매하시려는 상품의 과세를 확인해 주시기 바랍니다. (과세상품 : 부가세포함, 영세상품: 매입세액 환급, 면세상품: 부가세 신고대상에서 제외되는 상품)</p>
+                        <p class="txtInfo">국내 결제서비스 제공사(PG사)에 판매가 정보를 전송할 경우, 법적 부가가치세율에 따라 설정한 과세비율과 관계없이 10%로 고정 처리됩니다.</p>    
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">판매가 계산</th>
+                    <td>
+                        <div class="w3-container">
+                            <table class="w3-table">
+                                <tr>
+                                    <th>
+                                        <div class="w3-center">
+                                            마진율
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="w3-center">
+                                            추가금액
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="w3-center">
+                                            판매가적용
+                                        </div>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="w3-center">
+                                            <input type="text" name="margin_rate" id="margin_rate" style="width:40%" value="10" dir="rtl"> % 
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="w3-center">
+                                            <input type="text" name="add_price" id="add_price" style="width:40%"  dir="rtl"> 원
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="w3-center">
+                                            <button type="button">판매가적용</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <p class="txtInfo">판매가 계산방식은 [공급가 + (공급가 * 마진율) + 추가금액] 입니다.</p>
+                        <p class="txtInfo">[판매가적용] 버튼을 누르면 하단 [판매가] 정보에 결제화폐 기준으로 판매가가 자동계산되어 적용됩니다.</p>    
+                    
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">판매가 <img src="/w3images/required_icon.png"></th>
+                    <td>
+                        <div class="w3-container">
+                            <table class="w3-table">
+                                <tr>
+                                    <th>
+                                        <div class="w3-center">
+                                            판매가
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="w3-center">
+                                            상품가
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="w3-center">
+                                            과세금액
+                                        </div>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="w3-center">
+                                            <input type="text" name="product_sale_price" id="product_salePrice" style="width:40%" value="10" dir="rtl"> % 
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="w3-center">
+                                            <span id="product_price"></span> 원
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="w3-center">
+                                            <span id="product_taxPrice"></span> 원
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
 
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">주문수량 제한</th>
+                    <td>
+                        <div class="w3-container">
+                            <table class="w3-table">
+                                <tr>
+                                    <th scope="row">최소 주문수량</th>
+                                    <td>
+                                        <input type="text" name="product_min_qty" id="product_min_qty" style="width:10%" value="1" dir="rtl"> 개 이상
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">최대 주문수량</th>
+                                    <td>
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">적립금</th>
+                    <td>
+                        
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="w3-container">
+        <div class="w3-container w3-grey w3-margin">
+            <p>
+                옵션/재고 정보
+            </p>
+        </div>
+        <div class="w3-container">
+            <table class="w3-table">
+                <tr>
+                    <th scope="row">옵션 사용</th>
+                    <td>
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">재고관리 사용</th>
+                    <td>
+                        
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="w3-container">
+        <div class="w3-container w3-grey w3-margin">
+            <p>
+                이미지 정보
+            </p>
+        </div>
+        <div class="w3-container">
+            <table class="w3-table">
+                <tr>
+                    <th scope="row">이미지 등록</th>
+                    <td>
+                        
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+    </div>
 </body>
 
 </html>
