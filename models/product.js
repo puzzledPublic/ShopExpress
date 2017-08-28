@@ -7,9 +7,9 @@ class Product{
         this.categoryId = '';       //기본 분류
         this.categoryId2 = '';      //2차 분류
         this.name = '';             //이름
-        this.maker = '';            //제조사
+        this.maker = '자체제작';     //제조사
         this.origin = '';           //원산지
-        this.brand = '';            //브랜드
+        this.brand = '자체브랜드';   //브랜드
         this.model = '';            //모델
         this.type = 0;              //상품 유형
         this.customerPrice = 0;     //시중 가격

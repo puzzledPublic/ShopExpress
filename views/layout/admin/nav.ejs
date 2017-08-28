@@ -19,7 +19,9 @@
             <a href="/admin/static" class="w3-button w3-block ">STATIC</a>
         </div>
     </div>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/javascripts/adminCommon.js"></script>
+    <script>
+        let activeNavUrl = location.href.substring(location.href.lastIndexOf('/'));
+        $('div.w3-col  a[href=".'+activeNavUrl+'"]').parent().addClass('w3-white');
+    </script>
 </div>

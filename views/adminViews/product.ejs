@@ -21,7 +21,7 @@
                <tr>
                    <th scope="row">진열 상태</th>
                    <td>
-                        <label class="gLabel"><input type="radio" name="is_display" value="T">진열함</label>
+                        <label class="gLabel"><input type="radio" name="is_display" value="T" checked>진열함</label>
                         <label class="gLabel"><input type="radio" name="is_display" value="F">진열안함</label>
                         <p class="txtInfo">등록한 상품의 쇼핑몰 진열(노출)여부를 설정합니다.</p>
                    </td>
@@ -29,7 +29,7 @@
                 <tr>
                     <th scope="row">판매 상태</th>
                     <td>
-                        <label class="gLabel"><input type="radio" name="selling_status" value="T">판매함</label>
+                        <label class="gLabel"><input type="radio" name="selling_status" value="T" checked>판매함</label>
                         <label class="gLabel"><input type="radio" name="selling_status" value="F">판매안함</label>
                         <ul class="txtInfo">
                             <li>진열한 상품의 판매여부를 설정합니다.</li>
@@ -137,7 +137,7 @@
                     <td>
                         <div class="w3-row">
                             <div class="w3-col" style="width:15%">
-                                <input class="w3-input w3-border" style="padding: 2px" type="text" name="product_model" dir="rtl">
+                                <input class="w3-input w3-border" style="padding: 2px" type="text" name="product_buy" id="product_buy" dir="rtl">
                             </div>
                             <div class="w3-col" style="width:auto">
                                 <span>원</span>
@@ -150,7 +150,7 @@
                     <th scope="row">과세 구분</th>
                     <td>
                         <div class="w3-row">
-                            <label class="gLabel"><input type="radio" name="product_tax_type" id="product_tax_typeA" value="A">과세상품</label>
+                            <label class="gLabel"><input type="radio" name="product_tax_type" id="product_tax_typeA" value="A" checked>과세상품</label>
                             <label class="gLabel"><input type="radio" name="product_tax_type" id="product_tax_typeB" value="B">영세상품</label>
                             <label class="gLabel"><input type="radio" name="product_tax_type" id="product_tax_typeC" value="C">면세상품</label>
                         </div>
@@ -204,7 +204,7 @@
                                     </td>
                                     <td>
                                         <div class="w3-center">
-                                            <button type="button">판매가적용</button>
+                                            <button class="w3-button w3-round w3-indigo" id="apply_price" type="button">판매가적용</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -240,7 +240,7 @@
                                 <tr>
                                     <td>
                                         <div class="w3-center">
-                                            <input type="text" name="product_sale_price" id="product_salePrice" style="width:40%" value="10" dir="rtl"> % 
+                                            <input type="text" name="product_sale_price" id="product_sale_price" style="width:40%" value="0" dir="rtl"> 원
                                         </div>
                                     </td>
                                     <td>
@@ -273,7 +273,9 @@
                                 <tr>
                                     <th scope="row">최대 주문수량</th>
                                     <td>
-
+                                        <label class="gLabel"><input type="radio" name="product_max_type" id="product_max_typeF" value="F" checked>제한없음</label>
+                                        <input type="radio" name="product_max_type" id="product_max_typeT" value="T">
+                                        <input type="text" name="product_max_qty" id="product_max_qty" disabled><label for="product_max_typeT">개 이하로 제한</label>
                                     </td>
                                 </tr>
                             </table>
@@ -283,7 +285,7 @@
                 <tr>
                     <th scope="row">적립금</th>
                     <td>
-                        
+                        <input type="text" name="product_point" id="product_point" style="width:10%" value="0" dir="rtl">원
                     </td>
                 </tr>
             </table>
@@ -300,17 +302,66 @@
                 <tr>
                     <th scope="row">옵션 사용</th>
                     <td>
-                        
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">재고관리 사용</th>
-                    <td>
-                        
+                        <label class="gLabel"><input type="radio" name="has_option" id="has_optionT" value="T">사용함</label>
+                        <label class="gLabel"><input type="radio" name="has_option" id="has_optionF" value="F" checked>사용안함</label>
                     </td>
                 </tr>
             </table>
+            <table class="w3-table" name="input-option" style="display: none">
+                <tr>
+                    <th scope="row">옵션 입력</th>
+                    <td>
+                        <div class="w3-container">
+                                <table class="w3-table">
+                                        <tr>
+                                            <th>
+                                                <div class="w3-center">
+                                                    옵션명
+                                                </div>
+                                            </th>
+                                            <th>
+                                                <div class="w3-center">
+                                                    옵션값
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="w3-center">
+                                                     <input class="w3-input w3-border" type="text" name="product_option_name" id="product_option_name" > 
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="w3-center">
+                                                     <input class="w3-input w3-border" type="text" name="product_option_value" id="product_option_value" > 
+                                                </div>
+                                            </td>
+                                        </tr>
+                                </table>
+                                <div class="w3-container">
+                                    <button class="w3-button w3-right w3-round w3-indigo" type="button">모든 옵션 품목 추가</button>
+                                </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table class="w3-table" id="manage-stock">
+                    <tr>
+                        <th scope="row">재고관리 사용</th>
+                        <td>
+                            <label class="gLabel"><input type="radio" name="use_manage_stock" id="use_manage_stockT" value="T">사용함</label>
+                            <label class="gLabel"><input type="radio" name="use_manage_stock" id="use_manage_stockF" value="F" checked>사용안함</label>
+                        </td>
+                    </tr>
+            </table>
         </div>
+    </div>
+    <div class="w3-container w3-margin" name="input-option" style="display:none">
+            <table class="w3-table" >
+                <th scope="col">No</th>
+                <th scope="col">품목명/품목코드</th>
+                <th scope="col">재고수량</th>
+            </table>
     </div>
     <div class="w3-container">
         <div class="w3-container w3-grey w3-margin">
@@ -323,13 +374,21 @@
                 <tr>
                     <th scope="row">이미지 등록</th>
                     <td>
-                        
+                        <input type="file" name="product_image" >
                     </td>
                 </tr>
                 
             </table>
         </div>
     </div>
+
+    <div class="w3-container w3-padding-32 w3-center">
+        <button class="w3-button w3-indigo w3-round" type="button">등록하기</button>
+        <button class="w3-button w3-indigo w3-round" type="button">돌아가기</button>
+    </div>
+
+    
+    <script src="/javascripts/adminCommon.js"></script>
 </body>
 
 </html>
